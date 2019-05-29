@@ -101,6 +101,7 @@ Lbryio.setOverride(
         // @endif
         // @if TARGET='web'
         const { auth_token: authToken } = cookie.parse(document.cookie);
+        Lbry.addApiHeaders({ 'X-Lbry-Auth-Token': authToken });
         resolve(authToken);
         // @endif
       }
@@ -228,6 +229,7 @@ const init = () => {
 
   // @if TARGET='app'
   if (window.sessionStorage.getItem('loaded') === 'y') {
+    console.log('LOADED');
     onDaemonReady();
   } else {
     ReactDOM.render(
